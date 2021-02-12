@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const base = axios.create({
+const instance = axios.create({
   baseURL: "https://api.chucknorris.io/jokes/",
 });
 
-export default base;
+export default instance;
