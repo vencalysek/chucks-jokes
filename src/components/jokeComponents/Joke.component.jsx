@@ -1,64 +1,45 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, Fragment} from "react";
 
 // redux
 import {useDispatch, useSelector} from "react-redux";
-import {fetchJokeAsync, searchJokeAsync} from "../../redux/jokes/jokes.actions";
+import {fetchJokeAsync} from "../../redux/jokes/jokes.actions";
 
 // mui
-import {Button, Container, Paper, Typography, Input} from "@material-ui/core/";
+import {Button, Container, Paper, Typography} from "@material-ui/core/";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
-  container: {
-    textAlign: "center",
-    marginTop: theme.spacing(4),
-  },
-
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-  },
-
-  inputInput: {
-    padding: theme.spacing(1),
-    transition: theme.transitions.create("width"),
-    width: "18ch",
-    "&:focus": {
-      width: "20ch",
-    },
-  },
-
   paper: {
-    margin: "30px auto",
+    margin: "0 auto",
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    maxWidth: "max-content",
+    maxWidth: "30em",
     textOverflow: "ellipsis",
     overflow: "hidden",
-    position: 'relative'
+    position: "relative",
   },
-  
-  jokeContent:{
-    padding: theme.spacing(3)
+
+  jokeContent: {
+    padding: theme.spacing(2),
   },
 
   categoryCaption: {
-    position: 'absolute',
+    position: "absolute",
     right: theme.spacing(1),
     bottom: theme.spacing(1),
-    fontStyle: 'italic',
+    fontStyle: "italic",
   },
 
   button: {
     maxWidth: "max-content",
+    margin: theme.spacing(3),
   },
 }));
 
 const Joke = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [query, setQuery] = useState("");
 
   const joke = useSelector(state => state.jokes.joke);
   const fetchUrl = useSelector(state => state.jokes.fetchUrl);
@@ -87,69 +68,48 @@ const Joke = () => {
     dispatch(fetchJokeAsync(fetchUrl));
   }, [dispatch, fetchUrl]);
 
-  const handleChange = e => {
-    setQuery(e.target.value);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (query.length >= 3) {
-      dispatch(searchJokeAsync(query));
-      setQuery("");
-    } else {
-      alert("Please write longer query, minimum 3 characters.");
-    }
-  };
-
   return (
-    <div>
-      <Container className={classes.container}>
-        <form onSubmit={handleSubmit}>
-          <Input
-            value={query}
-            placeholder="Search…"
-            onChange={handleChange}
-            classes={{
-              input: classes.inputInput,
-            }}
-          />
-        </form>
+    <Container>
+      {/* if loaded show joke content */}
+      {isLoaded && (
+        <Fragment>
+          <Paper variant="outlined" className={classes.paper}>
+            
+            {/* if joke exist show content, if joke doesnt exist -> query wasn't found */}
+            {joke ? (
+              <Container>
 
-        {/* if loaded show joke content */}
-        {isLoaded && (
-          <>
-            <Paper variant="outlined" className={classes.paper}>
-              {/* if joke exist show content, if joke doesnt exist -> query wasn't found */}
-              {joke ? (
-                <Container>
-                  <Typography variant="subtitle1" className={classes.jokeContent}>{joke.value}</Typography>
-                  
-                  <Typography variant="caption" className={classes.categoryCaption}>
-                    {joke.categories.length ? (
-                      <span>"{joke.categories[0]}"</span>
-                    ) : (
-                      <span>"random"</span>
-                    )}
-                  </Typography>
-                </Container>
-              ) : (
-                <span>Can't find joke containing: "{searchQuery}"</span>
-              )}
-            </Paper>
+                {/* joke content */}
+                <Typography variant="subtitle1" className={classes.jokeContent}>
+                  {joke.value}
+                </Typography>
 
-            <Button
-              variant="outlined"
-              color="secondary"
-              className={classes.button}
-              onClick={() => {
-                dispatch(fetchJokeAsync(fetchUrl));
-              }}>
-              Kick me another one!
-            </Button>
-          </>
-        )}
-      </Container>
-    </div>
+                {/* joke category */}
+                <Typography variant="caption" className={classes.categoryCaption}>
+                  {joke.categories.length ? (
+                    <span>"{joke.categories[0]}"</span>
+                  ) : (
+                    <span>"random"</span>
+                  )}
+                </Typography>
+              </Container>
+            ) : (
+              <span>Can't find joke containing: "{searchQuery}"</span>
+            )}
+          </Paper>
+
+          <Button
+            variant="outlined"
+            color="secondary"
+            className={classes.button}
+            onClick={() => {
+              dispatch(fetchJokeAsync(fetchUrl));
+            }}>
+            Kick me another one!
+          </Button>
+        </Fragment>
+      )}
+    </Container>
   );
 };
 

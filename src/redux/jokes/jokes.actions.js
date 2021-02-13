@@ -45,7 +45,6 @@ export const fetchJokeAsync = url => {
       .get(url)
       .then(response => {
         const joke = response.data;
-        // console.log(response);
         dispatch(fetchJoke(joke));
       })
       .catch(err => console.log(err));

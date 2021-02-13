@@ -1,10 +1,11 @@
 import React from "react";
 
 import JokesCategories from "./JokesCategories.component";
+import SearchBar from "../search-bar/SearchBar.component";
 import Joke from "./Joke.component";
 
 // mui
-import {Container} from "@material-ui/core/";
+import {Container, Typography} from "@material-ui/core/";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -24,7 +25,9 @@ const JokeContainer = () => {
   return (
     <div className={classes.root}>
       <Container maxWidth="md">
+        <Typography variant="h3">Chuck's Jokes</Typography>
         <JokesCategories />
+        <SearchBar type='joke-search' placeholder='Search joke...' />
         <Joke />
       </Container>
     </div>

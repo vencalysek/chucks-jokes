@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 
 // redux
 import {useDispatch, useSelector} from "react-redux";
@@ -6,8 +6,16 @@ import {fetchCategoriesAsync, getFetchUrl} from "../../redux/jokes/jokes.actions
 
 // mui
 import {Grid, Button, Switch, FormControlLabel} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+  switchControl: {
+    padding: theme.spacing(3),
+  },
+}));
 
 const JokesCategories = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [selectedCategory, setSelectedCategory] = useState("");
 
@@ -40,8 +48,7 @@ const JokesCategories = () => {
   const handleClick = category => {
     if (category === selectedCategory) {
       setSelectedCategory("");
-      dispatchUrl('')
-
+      dispatchUrl("");
     } else {
       setSelectedCategory(category);
       dispatchUrl(`?category=${category}`);
@@ -49,8 +56,9 @@ const JokesCategories = () => {
   };
 
   return (
-    <div>
+    <Fragment>
       <FormControlLabel
+        className={classes.switchControl}
         control={
           <Switch
             checked={state.allowExplicit}
@@ -67,14 +75,14 @@ const JokesCategories = () => {
             <Button
               disabled={(category === "explicit") & !state.allowExplicit ? true : false}
               onClick={() => handleClick(category)}
-              variant={selectedCategory === category ? "contained" : "text"}
+              variant={selectedCategory === category ? "outlined" : "text"}
               color={category === "explicit" ? "secondary" : "primary"}>
               {category}
             </Button>
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Fragment>
   );
 };
 

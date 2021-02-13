@@ -2,34 +2,33 @@ import {JokesActionTypes} from "./jokes.types";
 
 const INIT_STATE = {
   fetchUrl: "random",
-  joke: '',
+  joke: {},
   categories: [],
-  searchQuery: '',
-  searchedJoke: '',
+  searchQuery: "",
+  searchedJoke: "",
   isLoaded: false,
 };
 
 const jokesReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
-
     case JokesActionTypes.IS_LOADED:
       return {
         ...state,
-        isLoaded: false
-      }
+        isLoaded: false,
+      };
 
     case JokesActionTypes.GET_FETCH_URL:
       return {
         ...state,
         fetchUrl: action.payload,
       };
-      
+
     case JokesActionTypes.FETCH_JOKE:
       return {
         ...state,
         joke: action.payload,
-        isLoaded: true
-      }
+        isLoaded: true,
+      };
 
     case JokesActionTypes.FETCH_CATEGORIES:
       return {
@@ -40,8 +39,8 @@ const jokesReducer = (state = INIT_STATE, action) => {
     case JokesActionTypes.GET_SEARCH_QUERY:
       return {
         ...state,
-        searchQuery: action.payload
-      }
+        searchQuery: action.payload,
+      };
 
     default:
       return state;
