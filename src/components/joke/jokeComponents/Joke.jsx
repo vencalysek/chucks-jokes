@@ -2,7 +2,7 @@ import React, {useEffect, Fragment} from "react";
 
 // redux
 import {useDispatch, useSelector} from "react-redux";
-import {fetchJokeAsync} from "../../redux/jokes/jokes.actions";
+import {fetchJokeAsync} from "../../../redux/jokes/jokes.actions";
 
 // mui
 import {Button, Container, Paper, Typography} from "@material-ui/core/";
@@ -74,11 +74,9 @@ const Joke = () => {
       {isLoaded && (
         <Fragment>
           <Paper variant="outlined" className={classes.paper}>
-            
             {/* if joke exist show content, if joke doesnt exist -> query wasn't found */}
             {joke ? (
               <Container>
-
                 {/* joke content */}
                 <Typography variant="subtitle1" className={classes.jokeContent}>
                   {joke.value}

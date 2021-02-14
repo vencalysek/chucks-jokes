@@ -1,9 +1,9 @@
 import "./App.css";
-import JokesContainer from "./components/jokeComponents/JokesContainer.component";
+import JokeContainer from "./components/joke/jokeContainers/JokesContainer";
 
 const App = () => {
   return <div className="App">
-    <JokesContainer />
+    <JokeContainer />
   </div>;
 };
 

@@ -1,8 +1,8 @@
 import React from "react";
 
-import JokesCategories from "./JokesCategories.component";
-import SearchBar from "../search-bar/SearchBar.component";
-import Joke from "./Joke.component";
+import JokesCategories from "../jokeComponents/JokesCategories";
+import SearchBar from "../../searchBar/SearchBar";
+import Joke from "../jokeComponents/Joke";
 
 // mui
 import {Container, Typography} from "@material-ui/core/";
