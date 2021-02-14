@@ -67,7 +67,7 @@ const JokeWrap = () => {
             {/* if joke exist render component, else render message, if !search query -> show message */}
             {
               joke ? (
-                <Joke joke={joke} />
+                <Joke jokeContent={joke.value} jokeCategory={joke.categories[0]} />
               ) : (
                 <Fragment>
                   {searchQuery ? (
