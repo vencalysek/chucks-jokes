@@ -68,8 +68,8 @@ export const searchJokeAsync = query => {
         const searchQuery = response.data.total === 0 ? query : "";
         const random = Math.floor(Math.random() * total);
         const joke = response.data.result[random];
-        dispatch(fetchJoke(joke));
         dispatch(getSearchQuery(searchQuery));
+        dispatch(fetchJoke(joke));
       })
       .catch(err => {
         console.log(err);
