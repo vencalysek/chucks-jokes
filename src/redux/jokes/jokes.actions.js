@@ -65,10 +65,9 @@ export const searchJokeAsync = query => {
       .get(`search?query=${query}`)
       .then(response => {
         const total = response.data.total;
-        const searchQuery = response.data.total === 0 ? query : "";
         const random = Math.floor(Math.random() * total);
         const joke = response.data.result[random];
-        dispatch(getSearchQuery(searchQuery));
+        dispatch(getSearchQuery(query));
         dispatch(fetchJoke(joke));
       })
       .catch(err => {

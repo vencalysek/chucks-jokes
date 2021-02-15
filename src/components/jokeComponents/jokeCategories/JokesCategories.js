@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from "react";
-import JokeCategory from "./JokeCategory";
+import JokeCategory from "../jokeCategory/JokeCategory";
 
 // redux
 import {useDispatch, useSelector} from "react-redux";

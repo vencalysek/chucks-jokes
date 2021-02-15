@@ -1,5 +1,5 @@
 import "./App.css";
-import JokeContainer from "./components/joke/jokeContainers/JokesContainer";
+import JokeContainer from "./components/jokeContainers/jokeContainer/JokesContainer";
 
 const App = () => {
   return <div className="App">

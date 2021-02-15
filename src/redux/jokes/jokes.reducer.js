@@ -5,7 +5,6 @@ const INIT_STATE = {
   joke: {},
   categories: [],
   searchQuery: "",
-  searchedJoke: "",
   isLoaded: false,
 };
 

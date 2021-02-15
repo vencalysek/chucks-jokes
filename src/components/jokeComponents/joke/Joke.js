@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Joke = ({jokeContent, jokeCategory}) => {
+const Joke = ({jokeContent, jokeCategory='random'}) => {
   const classes = useStyles();
 
   return (
@@ -29,7 +29,7 @@ const Joke = ({jokeContent, jokeCategory}) => {
 
       {/* joke category */}
       <Typography variant="caption" className={classes.categoryCaption}>
-      <span>"{jokeCategory ? jokeCategory : 'random' }"</span>
+      <span>"{jokeCategory}"</span>
       </Typography>
     </Container>
   );

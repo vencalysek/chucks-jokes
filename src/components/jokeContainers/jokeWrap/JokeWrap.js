@@ -1,5 +1,5 @@
 import React, {useEffect, Fragment} from "react";
-import Joke from "../jokeComponents/Joke";
+import Joke from "../../jokeComponents/joke/Joke";
 
 // redux
 import {useDispatch, useSelector} from "react-redux";
