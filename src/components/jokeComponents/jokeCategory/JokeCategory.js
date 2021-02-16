@@ -10,6 +10,7 @@ const JokeCategory = ({
   getSelectedCategory,
   selected,
 }) => {
+  
   // toogling categories
   const handleClick = category => {
     if (selected) {

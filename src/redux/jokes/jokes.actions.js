@@ -2,6 +2,8 @@ import {JokesActionTypes} from "./jokes.types";
 
 import axios from "../../axios.config";
 
+
+// joke categories actions
 const fetchCategories = categories => {
   return {
     type: JokesActionTypes.FETCH_CATEGORIES,
@@ -18,6 +20,8 @@ export const fetchCategoriesAsync = () => {
   };
 };
 
+
+// joke actions
 const setLoading = () => {
   return {
     type: JokesActionTypes.IS_LOADED,
@@ -51,6 +55,8 @@ export const fetchJokeAsync = url => {
   };
 };
 
+
+// search joke actions
 export const getSearchQuery = searchQuery => {
   return {
     type: JokesActionTypes.GET_SEARCH_QUERY,

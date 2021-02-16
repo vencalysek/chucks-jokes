@@ -13,15 +13,7 @@ import CustomInput from "../customInput/CustomInput";
 const useStyles = makeStyles(theme => ({
   searchform: {
     margin: theme.spacing(3),
-  },
-
-  input: {
-    padding: theme.spacing(1),
-    transition: theme.transitions.create("width"),
-    width: "18ch",
-    "&:focus": {
-      width: "20ch",
-    },
+    marginLeft: "70px",
   },
 }));
 
@@ -32,14 +24,14 @@ const SearchBar = ({type, placeholder}) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    
+
     // logic for search joke search
     if (type === "joke-search") {
-      if (query.length >= 3) {
+      if (query.trim().length >= 3) {
         dispatch(searchJokeAsync(query));
         setQuery("");
       } else {
-        alert("Please write longer query, minimum 3 characters.");
+        alert("Please write longer query, minimum are 3 characters...");
       }
     } else return;
   };
@@ -50,11 +42,7 @@ const SearchBar = ({type, placeholder}) => {
 
   return (
     <form onSubmit={handleSubmit} className={classes.searchform}>
-      <CustomInput
-        placeholder={"Seach joke"}
-        handleChange={handleChange}
-        value={query}
-      />
+      <CustomInput placeholder={placeholder} handleChange={handleChange} value={query} />
 
       <IconButton aria-label="search" type="submit">
         <SearchIcon />

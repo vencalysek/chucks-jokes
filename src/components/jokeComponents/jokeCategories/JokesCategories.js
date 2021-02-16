@@ -12,6 +12,7 @@ import {makeStyles} from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
   switchControl: {
     padding: theme.spacing(3),
+    color: theme.palette.text.secondary,
   },
 }));
 
@@ -34,7 +35,7 @@ const JokesCategories = () => {
     dispatch(getFetchUrl(`random${url}`));
   };
 
-  // switch to allow explicit jokes
+  // switch logic to allow explicit jokes
   const handleChange = () => {
     setAllowExplicit(!allowExplicit);
 

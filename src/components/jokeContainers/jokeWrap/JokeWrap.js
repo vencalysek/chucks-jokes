@@ -1,29 +1,38 @@
 import React, {useEffect, Fragment} from "react";
 import Joke from "../../jokeComponents/joke/Joke";
+import ChuckImg from "../../../images/chuck_norris.png";
 
 // redux
 import {useDispatch, useSelector} from "react-redux";
 import {fetchJokeAsync} from "../../../redux/jokes/jokes.actions";
 
 // mui
-import {Button, Container, Paper} from "@material-ui/core/";
+import {Container, Paper, Fade, IconButton} from "@material-ui/core/";
 import {makeStyles} from "@material-ui/core/styles";
+import RefreshIcon from "@material-ui/icons/Refresh";
 
 const useStyles = makeStyles(theme => ({
-  paper: {
-    margin: "0 auto",
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-    maxWidth: "30em",
-    textOverflow: "ellipsis",
-    overflow: "hidden",
+  jokeWrapper: {
     position: "relative",
   },
-
+  paper: {
+    padding: (theme.spacing(2), theme.spacing(3)),
+    color: theme.palette.text.secondary,
+    minHeight: "2.5em",
+    textOverflow: "ellipsis",
+  },
+  contentPadding: {
+    padding: theme.spacing(2),
+  },
+  chuckImgStyle: {
+    width: "250px",
+    marginBottom: "-45px",
+    position: "relative",
+  },
   button: {
-    maxWidth: "max-content",
-    margin: theme.spacing(3),
+    position: "absolute",
+    top: 222,
+    right: 2,
   },
 }));
 
@@ -60,37 +69,39 @@ const JokeWrap = () => {
 
   return (
     <Container>
-      {/* if loaded show joke content */}
-      {isLoaded && (
-        <Fragment>
+      <Fragment>
+        <div className={classes.jokeWrapper}>
+          <img src={ChuckImg} alt="chuck" className={classes.chuckImgStyle} />
           <Paper variant="outlined" className={classes.paper}>
-            {/* if joke exist render component, else render message, if !search query -> show message */}
-            {
-              joke ? (
-                <Joke jokeContent={joke.value} jokeCategory={joke.categories[0]} />
-              ) : (
-                <Fragment>
-                  {searchQuery ? (
-                    <span>Can't find joke containing: "{searchQuery}"</span>
+            {/* if loaded show joke content */}
+            {isLoaded && (
+              <Fade in={isLoaded} timeout={500} direction="right">
+                <div className={classes.contentPadding}>
+                  {/* if joke exist render component, else render message, if !search query -> show message */}
+                  {joke ? (
+                    <Joke jokeContent={joke.value} jokeCategory={joke.categories[0]} />
                   ) : (
-                    <span>Can't load joke :(</span>
+                    <div>
+                      {searchQuery ? (
+                        <span>Can't find joke containing: "{searchQuery}"</span>
+                      ) : (
+                        <span>Can't load joke :(</span>
+                      )}
+                    </div>
                   )}
-                </Fragment>
-              )
-            }
+                </div>
+              </Fade>
+            )}
+            <IconButton
+              className={classes.button}
+              onClick={() => {
+                dispatch(fetchJokeAsync(fetchUrl));
+              }}>
+              <RefreshIcon color="secondary" />
+            </IconButton>
           </Paper>
-
-          <Button
-            variant="outlined"
-            color="secondary"
-            className={classes.button}
-            onClick={() => {
-              dispatch(fetchJokeAsync(fetchUrl));
-            }}>
-            Kick me another one!
-          </Button>
-        </Fragment>
-      )}
+        </div>
+      </Fragment>
     </Container>
   );
 };
